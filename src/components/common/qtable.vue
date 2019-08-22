@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { isNotNormalValue } from "../../utils/tool";
+import { isNotNormalValue } from '../../utils/tool'
 export default {
   props: {
     header: {
@@ -40,7 +40,7 @@ export default {
     return {
       titles: [],
       newData: []
-    };
+    }
   },
   watch: {
     data(val) {
@@ -51,38 +51,38 @@ export default {
   created() {
     this.resetData()
     if (this.header) {
-      this.titles = this.header;
+      this.titles = this.header
     } else {
-      this.$on("settitle", oMsg => {
-        this.addTitle(oMsg);
-      });
+      this.$on('settitle', oMsg => {
+        this.addTitle(oMsg)
+      })
     }
   },
   methods: {
     addTitle(oMsg) {
       if (!this.titles.some(x => x.name === oMsg.name)) {
-        this.titles.push(oMsg);
+        this.titles.push(oMsg)
       }
     },
-    reset(){
+    reset() {
       this.titles = []
     },
-    resetData(){
+    resetData() {
       if (!this.data || this.data.length === 0) {
-        this.newData = [{}];
+        this.newData = [{}]
       } else {
-        this.newData = this.data;
+        this.newData = this.data
       }
     },
     isEmptyObj(obj) {
-      return Object.keys(obj).length === 0;
+      return Object.keys(obj).length === 0
     },
     isEmptyValue(val) {
-      console.log("val", val);
-      return isNotNormalValue(val);
+      console.log('val', val)
+      return isNotNormalValue(val)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
