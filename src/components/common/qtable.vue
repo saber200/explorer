@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { isNotNormalValue } from '../../utils/tool'
+import { isNotNormalValue } from "../../utils/tool";
 export default {
   props: {
     header: {
@@ -40,42 +40,49 @@ export default {
     return {
       titles: [],
       newData: []
-    }
+    };
   },
   watch: {
     data(val) {
-      this.newData = this.data
+      this.reset()
+      this.resetData()
     }
   },
   created() {
-    if (!this.data || this.data.length === 0) {
-      this.newData = [{}]
-    } else {
-      this.newData = this.data
-    }
+    this.resetData()
     if (this.header) {
-      this.titles = this.header
+      this.titles = this.header;
     } else {
-      this.$on('settitle', oMsg => {
-        this.addTitle(oMsg)
-      })
+      this.$on("settitle", oMsg => {
+        this.addTitle(oMsg);
+      });
     }
   },
   methods: {
     addTitle(oMsg) {
       if (!this.titles.some(x => x.name === oMsg.name)) {
-        this.titles.push(oMsg)
+        this.titles.push(oMsg);
+      }
+    },
+    reset(){
+      this.titles = []
+    },
+    resetData(){
+      if (!this.data || this.data.length === 0) {
+        this.newData = [{}];
+      } else {
+        this.newData = this.data;
       }
     },
     isEmptyObj(obj) {
-      return Object.keys(obj).length === 0
+      return Object.keys(obj).length === 0;
     },
     isEmptyValue(val) {
-      console.log('val', val)
-      return isNotNormalValue(val)
+      console.log("val", val);
+      return isNotNormalValue(val);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
